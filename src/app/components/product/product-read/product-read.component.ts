@@ -15,7 +15,7 @@ export class ProductReadComponent implements OnInit {
   products: Product[]
   dataSource
 
-  columns = ['id', 'name', 'price']
+  columns = ['id', 'name', 'price', 'actions']
   
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator  
   
