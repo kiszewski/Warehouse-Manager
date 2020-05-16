@@ -1,0 +1,17 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.footer p {
+    font-weight: 200;
+    margin: 0;
+}
+
+.footer i {
+    margin-left: 10px;
+}
