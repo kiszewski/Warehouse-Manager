@@ -1,0 +1,14 @@
+<mat-card mat-elevationz-3>
+    <mat-card-subtitle>
+        Confirma a exclusão?
+    </mat-card-subtitle>	
+    <mat-card-content>
+        {{ product.name }}
+    </mat-card-content>
+    <mat-card-actions>
+        <button color="warn" mat-raised-button
+            (click)="delete()">Excluir</button>
+        <button color="accent" mat-raised-button
+            (click)="cancel()">Cancelar</button>
+    </mat-card-actions>
+</mat-card>
