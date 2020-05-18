@@ -5,3 +5,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.successMsg {
+    background-color: #5cb85c;
+}
+
+.errorMsg {
+    background-color: #f44336;
+    color: #fff
+}

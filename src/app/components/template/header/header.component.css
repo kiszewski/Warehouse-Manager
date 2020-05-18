@@ -6,7 +6,9 @@
 }
 
 .header .logo {
-    max-height: 40px;
+    color: #fff;
+    padding: 0px 55px;
+    font-size: 3rem;
 }
 
 .header a {

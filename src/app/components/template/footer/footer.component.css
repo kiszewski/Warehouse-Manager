@@ -7,6 +7,13 @@
     align-items: center;
 }
 
+.footer a {
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    color: #303030;
+}
+
 .footer p {
     font-weight: 200;
     margin: 0;
