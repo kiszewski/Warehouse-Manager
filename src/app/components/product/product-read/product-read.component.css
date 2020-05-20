@@ -1,5 +1,11 @@
+div.table {
+  height: 450px;
+  overflow: auto;
+  margin-top: 20px;
+  background-color: #fff;
+}
+
 table {
-    margin-top: 20px;
     width: 100%;
   }
 

@@ -6,6 +6,29 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+app-root {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 64px 1fr 64px;
+    grid-template-areas: 
+    "header header"
+    "nav nav"
+    "footer footer";
+}
+
+app-header {
+    grid-area: header;
+}
+
+app-nav {
+    grid-area: nav;
+}
+
+app-footer {
+    grid-area: footer;
+}
+
 .successMsg {
     background-color: #5cb85c;
 }
