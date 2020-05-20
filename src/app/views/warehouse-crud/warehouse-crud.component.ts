@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HeaderService } from 'src/app/components/template/header/header.service';
 
 @Component({
   selector: 'app-warehouse-crud',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./warehouse-crud.component.css']
 })
 export class WarehouseCrudComponent implements OnInit {
-
-  constructor() { }
-
+  
+  constructor(private headerService: HeaderService) { }
+  
   ngOnInit(): void {
+    this.headerService.headerData = {
+      icon: 'store',
+      title: 'Almoxarifados',
+      url: '/warehouses'
+    }
   }
 
 }
