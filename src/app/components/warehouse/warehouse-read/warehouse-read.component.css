@@ -1,0 +1,17 @@
+.cards {
+    display: flex;
+}
+
+.card {
+    width: 300px;
+    margin: 0 10px;
+}
+
+.card img {
+    object-fit: cover;
+    height: 300px;
+}
+
+.card .buttons {
+    padding-top: 0;
+}

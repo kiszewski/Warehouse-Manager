@@ -1,5 +1,19 @@
-<ul>
-    <li *ngFor="let warehouse of warehouses">
-        {{ warehouse.name }}
-    </li>
-</ul>
+<div class="cards">
+    <mat-card *ngFor="let warehouse of warehouses" class="card">
+        <mat-card-header class="card-header">
+            <mat-card-title>
+                {{ warehouse.name }}
+            </mat-card-title>
+        </mat-card-header>
+        <img class="card-img" mat-card-image src="{{ warehouse.img_url }}"
+            alt="city">
+        <mat-card-actions class="buttons">
+            <button mat-button>
+                Atualizar
+            </button>
+            <button mat-button>
+                Deletar
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>
