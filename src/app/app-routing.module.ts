@@ -1,3 +1,4 @@
+import { WarehouseCrudComponent } from './views/warehouse-crud/warehouse-crud.component';
 import { ProductDeleteComponent } from './components/product/product-delete/product-delete.component';
 import { ProductUpdateComponent } from './components/product/product-update/product-update.component';
 import { NgModule } from '@angular/core';
@@ -27,6 +28,10 @@ const routes: Routes = [
   {
     path: "products/delete/:id",
     component: ProductDeleteComponent
+  },
+  {
+    path: "warehouses",
+    component: WarehouseCrudComponent
   }
 ];
 
