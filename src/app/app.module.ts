@@ -32,12 +32,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table'
 import { MatPaginatorModule } from '@angular/material/paginator'
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 //Angular utils
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt'
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { OperationCreateComponent } from './components/operation/operation-create/operation-create.component';
+import { OperationComponent } from './views/operation/operation.component';
 
 registerLocaleData(localePt)
 
@@ -55,7 +58,9 @@ registerLocaleData(localePt)
     ProductUpdateComponent,
     ProductDeleteComponent,
     WarehouseCrudComponent,
-    WarehouseReadComponent
+    WarehouseReadComponent,
+    OperationCreateComponent,
+    OperationComponent
   ],
   imports: [
     BrowserModule,
@@ -73,6 +78,7 @@ registerLocaleData(localePt)
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
+    MatAutocompleteModule
   ],
   providers: [{
     provide: LOCALE_ID,

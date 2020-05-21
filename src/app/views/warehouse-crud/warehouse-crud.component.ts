@@ -7,15 +7,16 @@ import { HeaderService } from 'src/app/components/template/header/header.service
   styleUrls: ['./warehouse-crud.component.css']
 })
 export class WarehouseCrudComponent implements OnInit {
-  
-  constructor(private headerService: HeaderService) { }
-  
-  ngOnInit(): void {
+
+  constructor(private headerService: HeaderService) {
     this.headerService.headerData = {
       icon: 'store',
       title: 'Almoxarifados',
       url: '/warehouses'
     }
+  }
+
+  ngOnInit(): void {
   }
 
 }
