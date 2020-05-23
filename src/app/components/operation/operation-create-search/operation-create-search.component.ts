@@ -4,11 +4,11 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 
 @Component({
-  selector: 'app-operation-create',
-  templateUrl: './operation-create.component.html',
-  styleUrls: ['./operation-create.component.css']
+  selector: 'app-operation-create-search',
+  templateUrl: './operation-create-search.component.html',
+  styleUrls: ['./operation-create-search.component.css']
 })
-export class OperationCreateComponent implements OnInit {
+export class OperationCreateComponentSearch implements OnInit {
   warehouseControl = new FormControl()
   productControl = new FormControl()
 
@@ -21,7 +21,5 @@ export class OperationCreateComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.productControl)
   }
-
-
 
 }

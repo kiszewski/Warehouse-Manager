@@ -39,8 +39,9 @@ import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt'
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { OperationCreateComponent } from './components/operation/operation-create/operation-create.component';
+import { OperationCreateComponentSearch } from './components/operation/operation-create-search/operation-create-search.component';
 import { OperationComponent } from './views/operation/operation.component';
+import { OperationResultsComponent } from './components/operation/operation-results/operation-results.component';
 
 registerLocaleData(localePt)
 
@@ -59,9 +60,10 @@ registerLocaleData(localePt)
     ProductDeleteComponent,
     WarehouseCrudComponent,
     WarehouseReadComponent,
-    OperationCreateComponent,
-    OperationComponent
-  ],
+    OperationCreateComponentSearch,
+    OperationComponent,
+    OperationResultsComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
