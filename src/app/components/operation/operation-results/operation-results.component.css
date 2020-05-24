@@ -1,4 +1,9 @@
+div.table {
+    height: 400px;
+    margin-top: 10px;
+    overflow: auto;
+}
+
 table {
     width: 100%;
-    margin-top: 10px;
 }
