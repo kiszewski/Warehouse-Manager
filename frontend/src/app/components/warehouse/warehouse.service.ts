@@ -13,6 +13,6 @@ export class WarehouseService {
   constructor(private http: HttpClient) { }
 
   read(): Observable<Warehouse[]> {
-    return this.http.get<Warehouse[]>(this.baseUrl)
+    return this.http.get<Warehouse[]>('http://localhost/warehouses')
   }
 }

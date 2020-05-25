@@ -5,5 +5,4 @@ foreach($result as $key => $obj) {
     $result[$key]["price"] = floatval($result[$key]["price"]);
 }
 
-header('Content-Type: application/json');
 echo json_encode($result);

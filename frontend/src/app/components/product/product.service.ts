@@ -31,7 +31,7 @@ export class ProductService {
   }
 
   read(): Observable<Product[]> {
-    return this.http.get<Product[]>("https://cors-anywhere.herokuapp.com/http://localhost/products").pipe(
+    return this.http.get<Product[]>("http://localhost/products").pipe(
       map(obj => obj),
       catchError(e => this.errorHandler(e))
     )

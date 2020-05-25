@@ -3,5 +3,5 @@ export interface Warehouse {
     name: string
     cep: number
     location: string
-    img_url: string
+    image_url: string
 }

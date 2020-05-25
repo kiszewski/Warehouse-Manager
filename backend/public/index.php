@@ -1,4 +1,5 @@
 <?php
+header('Access-Control-Allow-Origin: http://localhost:4200');
 
 require_once(dirname(__FILE__, 2) . '/src/utils/config.php');
 
