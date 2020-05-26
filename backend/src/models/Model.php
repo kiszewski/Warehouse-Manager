@@ -22,8 +22,7 @@ class Model {
     }
 
     public static function get($columns = '*') {
-        $resultJSON = [];
-        $class = get_called_class();
+        $registries = [];
         
         $sql = "SELECT ${columns} FROM "
         . static::$tableName;
@@ -34,9 +33,38 @@ class Model {
 
         if($result) {
             while ($row = $result->fetch_assoc()) {
-                $resultJSON[] = $row;
+                $registries[] = $row;
             }
         }
-        return $resultJSON;
+        return $registries;
+    }
+
+    public static function insert($array) {
+        $conn = Database::conect();
+
+        $sql = "INSERT INTO " . static::$tableName . 
+        " (name, price) VALUES (?, ?)";
+
+        $stmt = $conn->prepare($sql);
+        $params = static::formatValues($array);
+        $stmt->bind_param('sd', ...$params);
+
+        if ($stmt->execute()) {
+            return $stmt;
+        } else {
+            return $stmt->error;
+        }
+    }
+
+    private static function formatValues($array) {
+        $values = [];
+        foreach ($array as $value) {
+            if (is_string($value)) {
+                $values[] = "$value";
+            } else {
+                $values[] = $value;
+            }
+        }
+        return $values;
     }
 }

@@ -24,14 +24,21 @@ export class ProductService {
   }
 
   create(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.baseUrl, product).pipe(
+    return this.http.post<Product>("http://localhost/products", product).pipe(
       map(obj => obj),
       catchError(e => this.errorHandler(e))
     )
   }
+  // create(product: Product): Observable<Product> {
+  //   return this.http.post<Product>(this.baseUrl, product).pipe(
+  //     map(obj => obj),
+  //     catchError(e => this.errorHandler(e))
+  //   )
+  // }
 
   read(): Observable<Product[]> {
-    return this.http.get<Product[]>("http://localhost/products").pipe(
+    return this.http.get<Product[]>(this.baseUrl).pipe(
+    // return this.http.get<Product[]>("http://localhost/products").pipe(
       map(obj => obj),
       catchError(e => this.errorHandler(e))
     )
