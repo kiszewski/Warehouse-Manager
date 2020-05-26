@@ -12,4 +12,12 @@ class Database {
             die('Error' . $conexao->connect_error);
         }
     }
+
+    public static function sendQuery($sql) {
+        $cpnection = self::conect();
+        $result = $cpnection->query($sql);
+        $cpnection->close();
+        
+        return $result;
+    }
 }

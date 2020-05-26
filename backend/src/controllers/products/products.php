@@ -2,7 +2,12 @@
 $json = file_get_contents('php://input');   
 
 if ($json == "") {
-    $result = Product::get();
+    if(isset($id)) {
+        $result = Product::get($id);
+        echo json_encode($result[0]);
+        exit;
+    }
+     $result = Product::get();
     foreach ($result as $key => $obj) {
         $result[$key]["id"] = intval($result[$key]["id"]);
         $result[$key]["price"] = floatval($result[$key]["price"]);
@@ -12,4 +17,6 @@ if ($json == "") {
 } else {
     $array = json_decode($json, 1);
     $result = Product::insert($array);
+    $array['id'] = $result;
+    echo json_encode($array);
 }

@@ -37,26 +37,38 @@ export class ProductService {
   // }
 
   read(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.baseUrl).pipe(
-    // return this.http.get<Product[]>("http://localhost/products").pipe(
+    return this.http.get<Product[]>("http://localhost/products").pipe(
       map(obj => obj),
       catchError(e => this.errorHandler(e))
     )
   }
+  // read(): Observable<Product[]> {
+  //   return this.http.get<Product[]>(this.baseUrl).pipe(
+  //   // return this.http.get<Product[]>("http://localhost/products").pipe(
+  //     map(obj => obj),
+  //     catchError(e => this.errorHandler(e))
+  //   )
+  // }
 
   readById(id: string): Observable<Product> {
-    return this.http.get<Product>(`${this.baseUrl}/${id}`).pipe(
+    return this.http.get<Product>(`http://localhost/products/${id}`).pipe(
       map(obj => obj),
       catchError(e => this.errorHandler(e))
     )
   }
 
   update(product: Product): Observable<Product> {
-    return this.http.put<Product>(`${this.baseUrl}/${product.id}`, product).pipe(
+    return this.http.put<Product>(`http://localhost/products/update/${product.id}`, product).pipe(
       map(obj => obj),
       catchError(e => this.errorHandler(e))
     )
   }
+  // update(product: Product): Observable<Product> {
+  //   return this.http.put<Product>(`${this.baseUrl}/${product.id}`, product).pipe(
+  //     map(obj => obj),
+  //     catchError(e => this.errorHandler(e))
+  //   )
+  // }
 
   delete(id: number): Observable<Product> {
     return this.http.delete<Product>(`${this.baseUrl}/${id}`).pipe(

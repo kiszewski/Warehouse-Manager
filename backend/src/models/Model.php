@@ -21,11 +21,15 @@ class Model {
         $this->values[$key] = $value;
     }
 
-    public static function get($columns = '*') {
+    public static function get($id = null, $columns = '*') {
         $registries = [];
         
         $sql = "SELECT ${columns} FROM "
         . static::$tableName;
+
+        if(isset($id)) {
+            $sql .= " WHERE id = {$id}";
+        }
 
         $conn = Database::conect();
         $result = $conn->query($sql);
@@ -49,10 +53,36 @@ class Model {
         $params = static::formatValues($array);
         $stmt->bind_param('sd', ...$params);
 
+        
         if ($stmt->execute()) {
-            return $stmt;
+            $conn->close();
+            return $stmt->insert_id;
         } else {
             return $stmt->error;
+        }
+    }
+
+    public static function update($array, $id) {
+        $sql = "UPDATE products SET ";
+
+        foreach($array as $key => $value) {
+            if($key !== 'id') {
+                $sql .= "$key = " . static::getFormatedValue($value) . ", ";
+            } else {
+                $id = $value;
+            }
+            $values[] = static::formatValues($value);
+        }
+
+        $sql[strlen($sql) - 2] = ' ';
+        $sql .= "WHERE id = $id";
+
+        $resultado = Database::sendQuery($sql);
+
+        if($resultado) {
+            return $resultado;
+        } else {
+            return $sql;
         }
     }
 
@@ -66,5 +96,15 @@ class Model {
             }
         }
         return $values;
+    }
+
+    private static function getFormatedValue($value) {
+        if(is_null($value)) {
+            return "null";
+        } elseif(is_string($value)) {
+            return "'$value'";
+        } else {
+            return $value;
+        }
     }
 }
