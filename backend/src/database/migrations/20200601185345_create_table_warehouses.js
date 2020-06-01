@@ -5,6 +5,7 @@ exports.up = async knex => knex.schema.createTable('warehouses', table => {
     table.integer('cep', 8).notNullable()
     table.string('location').notNullable()
     table.string('image_url').notNullable()
+    table.timestamp('deleted_at')
     table.timestamp('created_at').defaultTo(knex.fn.now())
 })
 
