@@ -11,6 +11,7 @@ import { map, catchError } from 'rxjs/operators';
 export class ProductService {
 
   baseUrl = 'http://localhost:3001/products'
+  // baseUrl2 = 'http://localhost/products'
 
   constructor(private snackBar: MatSnackBar, private http: HttpClient) { }
 
@@ -23,55 +24,55 @@ export class ProductService {
     })
   }
 
-  create(product: Product): Observable<Product> {
-    return this.http.post<Product>("http://localhost/products", product).pipe(
-      map(obj => obj),
-      catchError(e => this.errorHandler(e))
-    )
-  }
   // create(product: Product): Observable<Product> {
-  //   return this.http.post<Product>(this.baseUrl, product).pipe(
+  //   return this.http.post<Product>(this.baseUrl2, product).pipe(
   //     map(obj => obj),
   //     catchError(e => this.errorHandler(e))
   //   )
   // }
-
-  read(): Observable<Product[]> {
-    return this.http.get<Product[]>("http://localhost/products").pipe(
+  create(product: Product): Observable<Product> {
+    return this.http.post<Product>(this.baseUrl, product).pipe(
       map(obj => obj),
       catchError(e => this.errorHandler(e))
     )
   }
+
   // read(): Observable<Product[]> {
-  //   return this.http.get<Product[]>(this.baseUrl).pipe(
-  //   // return this.http.get<Product[]>("http://localhost/products").pipe(
+  //   return this.http.get<Product[]>(this.baseUrl2).pipe(
   //     map(obj => obj),
   //     catchError(e => this.errorHandler(e))
   //   )
   // }
+  read(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.baseUrl).pipe(
+    // return this.http.get<Product[]>("http://localhost/products").pipe(
+      map(obj => obj),
+      catchError(e => this.errorHandler(e))
+    )
+  }
 
   readById(id: string): Observable<Product> {
-    return this.http.get<Product>(`http://localhost/products/${id}`).pipe(
+    return this.http.get<Product>(`${this.baseUrl}/${id}`).pipe(
       map(obj => obj),
       catchError(e => this.errorHandler(e))
     )
   }
 
-  update(product: Product): Observable<Product> {
-    return this.http.put<Product>(`http://localhost/products/update/${product.id}`, product).pipe(
-      map(obj => obj),
-      catchError(e => this.errorHandler(e))
-    )
-  }
   // update(product: Product): Observable<Product> {
-  //   return this.http.put<Product>(`${this.baseUrl}/${product.id}`, product).pipe(
+  //   return this.http.put<Product>(`${this.baseUrl2}/update/${product.id}`, product).pipe(
   //     map(obj => obj),
   //     catchError(e => this.errorHandler(e))
   //   )
   // }
+  update(product: Product): Observable<Product> {
+    return this.http.put<Product>(`${this.baseUrl}/${product.id}`, product).pipe(
+      map(obj => obj),
+      catchError(e => this.errorHandler(e))
+    )
+  }
 
   delete(id: number): Observable<Product> {
-    return this.http.delete<Product>(`${this.baseUrl}/${id}`).pipe(
+    return this.http.delete<Product>(`${this.baseUrl}/delete/${id}`).pipe(
       map(obj => obj),
       catchError(e => this.errorHandler(e))
     )

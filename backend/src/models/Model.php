@@ -77,13 +77,21 @@ class Model {
         $sql[strlen($sql) - 2] = ' ';
         $sql .= "WHERE id = $id";
 
-        $resultado = Database::sendQuery($sql);
+        $result = Database::sendQuery($sql);
 
-        if($resultado) {
-            return $resultado;
+        if($result) {
+            return $result;
         } else {
             return $sql;
         }
+    }
+
+    public static function delete($id) {
+        $sql = "DELETE FROM " . static::$tableName . "
+        WHERE id = " . $id;
+
+        $result = Database::sendQuery($sql);
+        return $result;
     }
 
     private static function formatValues($array) {
