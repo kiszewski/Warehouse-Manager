@@ -1,6 +1,13 @@
+const knex = require('../database')
+
 module.exports = {
-    index(req, res, next) {
-        return res.json('olaaa')
+    async index(req, res, next) {
+        try {
+            warehouses = await knex('warehouses')
+            res.json(warehouses)
+        } catch (error) {
+            
+        }
     },
 
     create(req, res, next) {
