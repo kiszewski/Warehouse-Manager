@@ -3,6 +3,7 @@ const routes = express.Router()
 
 const ProductController = require('./controllers/ProductController')
 const WarehouseController = require('./controllers/WarehouseController')
+const OperationController = require('./controllers/OperationController')
 
 routes
     //Produtos
@@ -13,5 +14,8 @@ routes
 
     //Almoxarifados:
     .get('/warehouses', WarehouseController.index )
+
+    //Movimentações:
+    .get('/operations', OperationController.index )
 
 module.exports = routes
