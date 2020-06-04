@@ -10,8 +10,19 @@ module.exports = {
         }
     },
 
-    create(req, res, next) {
+    async create(req, res, next) {
+        try {
+            const { name, price } = req.body
 
+            const result = await knex('products')
+                .insert({name, price})
+
+            const id = result[0]
+
+            res.json({ id, name, price })
+        } catch (error) {
+            next(error)
+        }
     },
 
     update(req, res, next) {

@@ -6,7 +6,7 @@ module.exports = {
             warehouses = await knex('warehouses')
             res.json(warehouses)
         } catch (error) {
-            
+            next(error)
         }
     },
 
