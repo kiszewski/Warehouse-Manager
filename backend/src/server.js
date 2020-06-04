@@ -14,7 +14,7 @@ app.use((req, res, next) => {
 
 app.use((error, req, res, next) => {
     res.status(error.status || 500)
-    res.send({ error: error.message })
+    res.send({ error: error.message || error})
 })
 
 app.listen(3000)

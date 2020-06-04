@@ -15,7 +15,7 @@ module.exports = {
             const { name, price } = req.body
 
             const result = await knex('products')
-                .insert({name, price})
+                .insert({ name, price })
 
             const id = result[0]
 
@@ -31,19 +31,38 @@ module.exports = {
             const { name, price } = req.body
 
             let result = await knex('products')
-                .where('id', '=', id)
+                .where({ id })
                 .update({ name, price }, ['name', 'price', 'id'])
 
-            result = result === 1 ? { id, name, price } : 'error'
+            if (result === 1) {
+                result = { id, name, price }
+            } else {
+                throw 'Id inválido'
+            }
 
             res.json(result)
-            
+
         } catch (error) {
             next(error)
         }
     },
 
-    delete(req, res, next) {
+    async delete(req, res, next) {
+        try {
+            const { id } = req.params
 
+            let result = await knex('products')
+                .where({ id })
+                .delete()
+
+            if (result !== 1) {
+                throw 'Id inválido'
+            }
+
+            res.json(result)
+
+        } catch (error) {
+            next(error)
+        }
     }
 }
