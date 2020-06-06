@@ -10,8 +10,19 @@ module.exports = {
         }
     },
 
-    create(req, res, next) {
+    async create(req, res, next) {
+        try {
+            let warehouse = { name, cep, location, image_url } = req.body
 
+            id = await knex('warehouses')
+                .insert(warehouse)
+
+            warehouse.id = id[0]
+
+            res.json(warehouse)
+        } catch (error) {
+            next(error)
+        }
     },
 
     update(req, res, next) {
