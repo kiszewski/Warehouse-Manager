@@ -3,7 +3,10 @@ const knex = require('../database')
 module.exports = {
     async index(req, res, next) {
         try {
-            warehouses = await knex('warehouses')
+            let warehouses = await knex('warehouses')
+                .where({ deleted_at: null })
+
+
             res.json(warehouses)
         } catch (error) {
             next(error)
@@ -26,24 +29,43 @@ module.exports = {
     },
 
     async update(req, res, next) {
-        let warehouse = { name, cep, location, image_url } = req.body
-        const { id } = req.params
+        try {
+            let warehouse = { name, cep, location, image_url } = req.body
+            const { id } = req.params
 
-        let result = await knex('warehouses')
-            .update(warehouse)
-            .where({ id })
+            let result = await knex('warehouses')
+                .update(warehouse)
+                .where({ id })
 
-        if (result === 1) {
-            warehouse.id = id
-            result = warehouse
-        } else {
-            throw "Id inválido"
+            if (result === 1) {
+                warehouse.id = id
+                result = warehouse
+            } else {
+                throw "Id inválido"
+            }
+
+            res.json(result)
+
+        } catch (error) {
+            next(error)
         }
-
-        res.json(result)
     },
 
-    delete(req, res, next) {
+    async delete(req, res, next) {
+        try {
+            const { id } = req.params
 
+            let result = await knex('warehouses')
+                .update({ deleted_at: knex.fn.now() })
+                .where({ id })
+
+            if (result !== 1) {
+                throw 'Id inválido'
+            }
+
+            res.json(result)
+        } catch (error) {
+            next(error)
+        }
     }
 }
