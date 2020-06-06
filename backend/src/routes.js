@@ -15,6 +15,7 @@ routes
     //Almoxarifados:
     .get('/warehouses', WarehouseController.index )
     .post('/warehouses', WarehouseController.create )
+    .put('/warehouses/:id', WarehouseController.update )
 
     //Movimentações:
     .get('/operations', OperationController.index )

@@ -25,8 +25,22 @@ module.exports = {
         }
     },
 
-    update(req, res, next) {
+    async update(req, res, next) {
+        let warehouse = { name, cep, location, image_url } = req.body
+        const { id } = req.params
 
+        let result = await knex('warehouses')
+            .update(warehouse)
+            .where({ id })
+
+        if (result === 1) {
+            warehouse.id = id
+            result = warehouse
+        } else {
+            throw "Id inválido"
+        }
+
+        res.json(result)
     },
 
     delete(req, res, next) {
