@@ -4,7 +4,7 @@ module.exports = {
     async index(req, res, next) {
         try {
             products = await knex('products')
-                .where({ deleted_at: null})
+                .where({ deleted_at: null })
             res.json(products)
         } catch (error) {
             next(error)
@@ -12,7 +12,16 @@ module.exports = {
     },
 
     async indexById(req, res, next) {
+        try {
+            const { id } = req.params
 
+            product = await knex('products')
+                .where({ id })
+
+            res.json(product[0])
+        } catch (error) {
+            next(error)
+        }
     },
 
     async create(req, res, next) {
