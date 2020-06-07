@@ -8,6 +8,7 @@ const OperationController = require('./controllers/OperationController')
 routes
     //Produtos
     .get('/products', ProductController.index )
+    .get('/products/:id', ProductController.indexById )
     .post('/products', ProductController.create )
     .put('/products/:id', ProductController.update )
     .delete('/products/:id', ProductController.delete )

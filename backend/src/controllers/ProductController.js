@@ -4,10 +4,15 @@ module.exports = {
     async index(req, res, next) {
         try {
             products = await knex('products')
+                .where({ deleted_at: null})
             res.json(products)
         } catch (error) {
             next(error)
         }
+    },
+
+    async indexById(req, res, next) {
+
     },
 
     async create(req, res, next) {
@@ -53,7 +58,7 @@ module.exports = {
 
             let result = await knex('products')
                 .where({ id })
-                .delete()
+                .update({ deleted_at: knex.fn.now() })
 
             if (result !== 1) {
                 throw 'Id inválido'
