@@ -10,7 +10,7 @@ import { map, catchError } from 'rxjs/operators';
 })
 export class ProductService {
 
-  baseUrl = 'http://localhost:3001/products'
+  baseUrl = 'http://localhost:3000/products'
   // baseUrl2 = 'http://localhost/products'
 
   constructor(private snackBar: MatSnackBar, private http: HttpClient) { }
@@ -72,7 +72,7 @@ export class ProductService {
   }
 
   delete(id: number): Observable<Product> {
-    return this.http.delete<Product>(`${this.baseUrl}/delete/${id}`).pipe(
+    return this.http.delete<Product>(`${this.baseUrl}/${id}`).pipe(
       map(obj => obj),
       catchError(e => this.errorHandler(e))
     )

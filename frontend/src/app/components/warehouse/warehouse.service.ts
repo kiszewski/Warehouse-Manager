@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 })
 export class WarehouseService {
 
-  baseUrl = "http://localhost:3001/warehouses"
+  baseUrl = "http://localhost:3000/warehouses"
 
   constructor(private http: HttpClient) { }
 
