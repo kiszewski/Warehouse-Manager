@@ -11,7 +11,6 @@ import { map, catchError } from 'rxjs/operators';
 export class ProductService {
 
   baseUrl = 'http://localhost:3000/products'
-  // baseUrl2 = 'http://localhost/products'
 
   constructor(private snackBar: MatSnackBar, private http: HttpClient) { }
 
@@ -24,12 +23,6 @@ export class ProductService {
     })
   }
 
-  // create(product: Product): Observable<Product> {
-  //   return this.http.post<Product>(this.baseUrl2, product).pipe(
-  //     map(obj => obj),
-  //     catchError(e => this.errorHandler(e))
-  //   )
-  // }
   create(product: Product): Observable<Product> {
     return this.http.post<Product>(this.baseUrl, product).pipe(
       map(obj => obj),
@@ -37,15 +30,8 @@ export class ProductService {
     )
   }
 
-  // read(): Observable<Product[]> {
-  //   return this.http.get<Product[]>(this.baseUrl2).pipe(
-  //     map(obj => obj),
-  //     catchError(e => this.errorHandler(e))
-  //   )
-  // }
   read(): Observable<Product[]> {
     return this.http.get<Product[]>(this.baseUrl).pipe(
-    // return this.http.get<Product[]>("http://localhost/products").pipe(
       map(obj => obj),
       catchError(e => this.errorHandler(e))
     )
@@ -58,12 +44,6 @@ export class ProductService {
     )
   }
 
-  // update(product: Product): Observable<Product> {
-  //   return this.http.put<Product>(`${this.baseUrl2}/update/${product.id}`, product).pipe(
-  //     map(obj => obj),
-  //     catchError(e => this.errorHandler(e))
-  //   )
-  // }
   update(product: Product): Observable<Product> {
     return this.http.put<Product>(`${this.baseUrl}/${product.id}`, product).pipe(
       map(obj => obj),

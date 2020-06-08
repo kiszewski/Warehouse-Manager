@@ -1,3 +1,4 @@
+import { OperationService } from './../operation.service';
 import { Operation } from './../operation.model';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,24 +8,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./operation-results.component.css']
 })
 export class OperationResultsComponent implements OnInit {
-  dataSource: Operation[] = [
-    {ns: 1, product_name: 'Iphone', warehouse_name: 'Matriz', date: '11/12/2020'},
-    {ns: 2, product_name: 'Iphone', warehouse_name: 'Matriz', date: '11/12/2020'},
-    {ns: 3, product_name: 'Iphone', warehouse_name: 'Matriz', date: '11/12/2020'},
-    {ns: 4, product_name: 'Iphone', warehouse_name: 'Matriz', date: '11/12/2020'},
-    {ns: 5, product_name: 'Iphone', warehouse_name: 'Matriz', date: '11/12/2020'},
-    {ns: 6, product_name: 'Iphone', warehouse_name: 'Matriz', date: '11/12/2020'},
-    {ns: 7, product_name: 'Iphone', warehouse_name: 'Matriz', date: '11/12/2020'},
-    {ns: 8, product_name: 'Iphone', warehouse_name: 'Matriz', date: '11/12/2020'},
-    {ns: 9, product_name: 'Iphone', warehouse_name: 'Matriz', date: '11/12/2020'},
-    {ns: 10, product_name: 'Iphone', warehouse_name: 'Matriz', date: '11/12/2020'},
-  ];
+
+  dataSource: Operation[]
 
   columns: string[] = ['ns', 'product_name', 'warehouse_name', 'date'];
 
-  constructor() { }
+  constructor(private operationService: OperationService) { }
 
   ngOnInit(): void {
+    this.operationService.read().subscribe(operations => {
+      this.dataSource = operations
+    })
   }
 
 }
