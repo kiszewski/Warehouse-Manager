@@ -1,3 +1,6 @@
+import { WarehouseService } from './../../warehouse/warehouse.service';
+import { ProductService } from './../../product/product.service';
+import { OperationService } from './../operation.service';
 import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
@@ -13,13 +16,22 @@ export class OperationCreateComponentSearch implements OnInit {
   productControl = new FormControl()
 
   NS: string = ""
-  warehouse_options: string[] = ['Matriz', 'Filial A', 'Filial B']
-  product_options: string[] = ['Iphone 11', 'Iphone 12', 'Iphone X']
+  warehouse_options: string[] = []
+  product_options: string[] = []
 
-  constructor() { }
+  constructor(
+      private operationService: OperationService, 
+      private productService: ProductService,
+      private warehouseService: WarehouseService ) { }
 
   ngOnInit(): void {
-    console.log(this.productControl)
+    this.productService.read().subscribe(
+      products => products.forEach(
+        product => this.product_options.push(product.name)))
+
+    this.warehouseService.read().subscribe(
+      warehouses => warehouses.forEach(
+        warehouse => this.warehouse_options.push(warehouse.name))) 
   }
 
 }
