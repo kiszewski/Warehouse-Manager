@@ -37,6 +37,10 @@ const routes: Routes = [
   {
     path: "operations",
     component: OperationComponent
+  },
+  {
+    path: "operations/:ns",
+    component: OperationComponent
   }
 ];
 

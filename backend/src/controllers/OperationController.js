@@ -15,7 +15,7 @@ module.exports = {
                     .joinRaw(`inner join products_warehouses on products_warehouses.product_id = products.id 
                     inner join warehouses on products_warehouses.warehouse_id = warehouses.id`)
             } else {
-                const { ns } = req.query
+                const { ns } = req.params
 
                 result = await knex('products_warehouses')
                     .select('products_warehouses.ns',
@@ -33,6 +33,33 @@ module.exports = {
             })
 
             res.json(result)
+        } catch (error) {
+            next(error)
+        }
+    },
+
+    async indexById(req, res, next) {
+        try {
+            var options = { year: 'numeric', month: 'numeric', day: 'numeric' }
+
+            const { ns } = req.params
+
+            result = await knex('products_warehouses')
+                .select('products_warehouses.ns',
+                    'products_warehouses.created_at as date',
+                    'products.name as product_name',
+                    'warehouses.name as warehouse_name')
+                .from('products')
+                .joinRaw(`inner join products_warehouses on products_warehouses.product_id = products.id 
+                inner join warehouses on products_warehouses.warehouse_id = warehouses.id`)
+                .where({ ns })
+
+            result.forEach(operation => {
+                operation.date = operation.date.toLocaleDateString('en-US', options);
+            })
+
+            res.json(result)
+
         } catch (error) {
             next(error)
         }

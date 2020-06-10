@@ -15,4 +15,8 @@ export class OperationService {
   read(): Observable<Operation[]> {
     return this.http.get<Operation[]>(this.baseUrl)
   }
+
+  readByNS(ns): Observable<Operation[]> {
+    return this.http.get<Operation[]>(`${this.baseUrl}/${ns}`)
+  }
 }

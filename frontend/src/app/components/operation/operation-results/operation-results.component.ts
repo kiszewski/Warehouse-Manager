@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { OperationService } from './../operation.service';
 import { Operation } from './../operation.model';
 import { Component, OnInit } from '@angular/core';
@@ -13,12 +14,22 @@ export class OperationResultsComponent implements OnInit {
 
   columns: string[] = ['ns', 'product_name', 'warehouse_name', 'date'];
 
-  constructor(private operationService: OperationService) { }
+  constructor(
+      private operationService: OperationService,
+      private router: Router,
+      private route: ActivatedRoute ) { }
 
   ngOnInit(): void {
-    this.operationService.read().subscribe(operations => {
-      this.dataSource = operations
-    })
-  }
+    const ns = this.route.snapshot.paramMap.get('ns')
 
+    if(ns) {
+      this.operationService.readByNS(ns).subscribe(operation => {
+        this.dataSource = operation
+      })
+    } else {
+      this.operationService.read().subscribe(operations => {
+        this.dataSource = operations
+      })
+    }
+  }
 }
