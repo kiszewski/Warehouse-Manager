@@ -17,6 +17,7 @@ export class OperationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('carregou componente principal');
     
   }
 

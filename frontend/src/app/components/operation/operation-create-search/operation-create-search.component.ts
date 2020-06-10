@@ -45,6 +45,5 @@ export class OperationCreateComponentSearch implements OnInit {
 
   getOperation(): void {
     this.router.navigate([`/operations/${this.operation.ns}`])
-      .then(x => console.log(x))
   }
 }

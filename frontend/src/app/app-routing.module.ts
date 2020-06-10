@@ -1,3 +1,4 @@
+import { OperationResultsComponent } from './components/operation/operation-results/operation-results.component';
 import { OperationComponent } from './views/operation/operation.component';
 import { WarehouseCrudComponent } from './views/warehouse-crud/warehouse-crud.component';
 import { ProductDeleteComponent } from './components/product/product-delete/product-delete.component';

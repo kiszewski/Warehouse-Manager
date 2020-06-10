@@ -1,3 +1,39 @@
+<mat-card>
+  <mat-card-title>
+    Entrada de produto
+  </mat-card-title>
+  <form class="form">
+    <mat-form-field class="form-field">
+      <mat-label>Número de Série</mat-label>
+      <input [(ngModel)]="operation.ns" [ngModelOptions]="{standalone: true}" matInput #serieNumber maxlength="5" placeholder="Ex. 02314">
+      <mat-hint align="end">{{serieNumber.value.length}} / 5</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <input type="text" placeholder="Selecione o tipo de produto" aria-label="Number" matInput
+        ([formControl])="productControl" [matAutocomplete]="autoProduct">
+      <mat-autocomplete #autoProduct="matAutocomplete">
+        <mat-option *ngFor="let option of product_options" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <input type="text" placeholder="Selecione o almoxarifado" aria-label="Number" matInput
+        ([formControl])="warehouseControl" [matAutocomplete]="autoWarehouse">
+      <mat-autocomplete #autoWarehouse="matAutocomplete">
+        <mat-option *ngFor="let option of warehouse_options" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <button color="warn" mat-raised-button >Cadastrar</button>
+    <button color="primary" mat-raised-button type="button" (click)="getOperation()">Buscar</button>
+  </form>
+</mat-card>
+
 <div class="table mat-elevation-z8">
   <table mat-table [dataSource]="dataSource">
   
