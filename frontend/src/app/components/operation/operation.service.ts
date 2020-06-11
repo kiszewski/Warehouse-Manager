@@ -7,8 +7,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class OperationService {
+  operation: Operation = {
+    ns: null,
+    product_name: '',
+    warehouse_name: '',
+    date: ''
+  }
 
-  ns = new BehaviorSubject(0)
+  operationSubject = new BehaviorSubject(this.operation)
 
   baseUrl = "http://localhost:3000/operations"
 
@@ -18,7 +24,11 @@ export class OperationService {
     return this.http.get<Operation[]>(this.baseUrl)
   }
 
-  readOperations(ns): Observable<Operation[]> {
-    return ns == 0 ? this.http.get<Operation[]>(this.baseUrl) : this.http.get<Operation[]>(`${this.baseUrl}/${ns}`) 
+  readOperations(operation: Operation): Observable<Operation[]> {
+    const { ns, product_name, warehouse_name } = operation
+
+    return (ns === null && product_name === '' && warehouse_name === '') ?
+      this.http.get<Operation[]>(this.baseUrl) : 
+      this.http.get<Operation[]>(`${this.baseUrl}/?ns=${ns}&product_name=${product_name}&warehouse_name=${warehouse_name}`)
   }
 }

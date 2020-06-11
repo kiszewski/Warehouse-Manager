@@ -21,6 +21,5 @@ routes
     
     //Movimentações:
     .get('/operations', OperationController.index )
-    .get('/operations/:ns', OperationController.indexById )
 
 module.exports = routes

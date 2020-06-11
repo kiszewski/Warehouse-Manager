@@ -1,12 +1,9 @@
 import { Operation } from './../operation.model';
-import { Router } from '@angular/router';
 import { WarehouseService } from './../../warehouse/warehouse.service';
 import { ProductService } from './../../product/product.service';
 import { OperationService } from './../operation.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-operation-create-search',
@@ -19,9 +16,9 @@ export class OperationCreateComponentSearch implements OnInit {
 
   operation: Operation = {
     ns: null,
-    product_name: null,
-    warehouse_name: null,
-    date: null
+    product_name: '',
+    warehouse_name: '',
+    date: ''
   }
 
   warehouse_options: string[] = []
@@ -30,8 +27,7 @@ export class OperationCreateComponentSearch implements OnInit {
   constructor(
       private operationService: OperationService, 
       private productService: ProductService,
-      private warehouseService: WarehouseService,
-      private router: Router ) { }
+      private warehouseService: WarehouseService ) { }
 
   ngOnInit(): void {
     this.productService.read().subscribe(
@@ -44,6 +40,6 @@ export class OperationCreateComponentSearch implements OnInit {
   }
 
   getOperation() {
-    this.operationService.ns.next(this.operation.ns)
+    this.operationService.operationSubject.next(this.operation)
   }
 }

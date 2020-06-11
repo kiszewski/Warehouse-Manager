@@ -17,9 +17,9 @@ export class OperationResultsComponent implements OnInit {
 
   operation: Operation = {
     ns: null,
-    product_name: null,
-    warehouse_name: null,
-    date: null
+    product_name: '',
+    warehouse_name: '',
+    date: ''
   }
 
   warehouse_options: string[] = []
@@ -29,14 +29,11 @@ export class OperationResultsComponent implements OnInit {
 
   columns: string[] = ['ns', 'product_name', 'warehouse_name', 'date'];
 
-  constructor(
-    private operationService: OperationService,
-    private router: Router,
-    private route: ActivatedRoute) { }
+  constructor(private operationService: OperationService) { }
 
   ngOnInit(): void {
-    this.operationService.ns.subscribe(ns => {
-      this.operationService.readOperations(ns).subscribe(operation => {
+    this.operationService.operationSubject.subscribe(operation => {
+      this.operationService.readOperations(operation).subscribe(operation => {
         this.dataSource = operation
       })
     })
