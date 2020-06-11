@@ -31,29 +31,14 @@ export class OperationResultsComponent implements OnInit {
 
   constructor(
     private operationService: OperationService,
-    private productService: ProductService,
-    private warehouseService: WarehouseService,
-    private router: Router ) { }
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.productService.read().subscribe(
-      products => products.forEach(
-        product => this.product_options.push(product.name)))
-
-    this.warehouseService.read().subscribe(
-      warehouses => warehouses.forEach(
-        warehouse => this.warehouse_options.push(warehouse.name)))
-
-    this.operationService.read().subscribe(operations => {
-      this.dataSource = operations
-    })
-  }
-
-  getOperation(): void {
-    console.log('clicou');
-    
-    this.operationService.readByNS(this.operation.ns).subscribe(operations => {
-      this.dataSource = operations
+    this.operationService.ns.subscribe(ns => {
+      this.operationService.readOperations(ns).subscribe(operation => {
+        this.dataSource = operation
+      })
     })
   }
 }

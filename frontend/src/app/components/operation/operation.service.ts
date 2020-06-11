@@ -1,5 +1,5 @@
 import { Operation } from './operation.model';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -7,6 +7,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class OperationService {
+
+  ns = new BehaviorSubject(0)
 
   baseUrl = "http://localhost:3000/operations"
 
@@ -16,7 +18,7 @@ export class OperationService {
     return this.http.get<Operation[]>(this.baseUrl)
   }
 
-  readByNS(ns): Observable<Operation[]> {
-    return this.http.get<Operation[]>(`${this.baseUrl}/${ns}`)
+  readOperations(ns): Observable<Operation[]> {
+    return ns == 0 ? this.http.get<Operation[]>(this.baseUrl) : this.http.get<Operation[]>(`${this.baseUrl}/${ns}`) 
   }
 }
