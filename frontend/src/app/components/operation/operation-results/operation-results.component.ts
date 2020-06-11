@@ -15,21 +15,15 @@ export class OperationResultsComponent implements OnInit {
   columns: string[] = ['ns', 'product_name', 'warehouse_name', 'date'];
 
   constructor(
-      private operationService: OperationService,
-      private router: Router,
-      private route: ActivatedRoute ) { }
+    private operationService: OperationService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const ns = this.route.snapshot.paramMap.get('ns')
-
-    if(ns) {
-      this.operationService.readByNS(ns).subscribe(operation => {
+    this.operationService.ns.subscribe(ns => {
+      this.operationService.readOperations(ns).subscribe(operation => {
         this.dataSource = operation
       })
-    } else {
-      this.operationService.read().subscribe(operations => {
-        this.dataSource = operations
-      })
-    }
+    })
   }
 }

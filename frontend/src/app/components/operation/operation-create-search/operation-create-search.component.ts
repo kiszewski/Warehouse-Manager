@@ -43,8 +43,7 @@ export class OperationCreateComponentSearch implements OnInit {
         warehouse => this.warehouse_options.push(warehouse.name))) 
   }
 
-  getOperation(): void {
-    this.router.navigate([`/operations/${this.operation.ns}`])
-      .then(x => console.log(x))
+  getOperation() {
+    this.operationService.ns.next(this.operation.ns)
   }
 }
