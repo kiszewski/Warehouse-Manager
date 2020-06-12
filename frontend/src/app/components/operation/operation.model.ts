@@ -3,5 +3,5 @@ export interface Operation {
     ns: number,
     product_name: string,
     warehouse_name: string,
-    date: string
+    date?: string
 }

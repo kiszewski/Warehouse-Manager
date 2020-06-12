@@ -17,8 +17,7 @@ export class OperationCreateComponentSearch implements OnInit {
   operation: Operation = {
     ns: null,
     product_name: '',
-    warehouse_name: '',
-    date: ''
+    warehouse_name: ''
   }
 
   warehouse_options: string[] = []
@@ -41,5 +40,14 @@ export class OperationCreateComponentSearch implements OnInit {
 
   getOperation() {
     this.operationService.operationSubject.next(this.operation)
+  }
+
+  createOperation() {
+    this.operationService.createOperation(this.operation).subscribe(id => {
+      this.operationService.operationSubject.next(this.operation)
+      this.operation.ns = null
+      this.operation.product_name = ''
+      this.operation.warehouse_name = ''
+    })
   }
 }

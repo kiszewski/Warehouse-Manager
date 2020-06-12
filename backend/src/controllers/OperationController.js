@@ -1,6 +1,4 @@
 const knex = require('../database')
-const { column } = require('../database')
-const { query } = require('express')
 
 module.exports = {
     async index(req, res, next) {
@@ -16,8 +14,7 @@ module.exports = {
                 .joinRaw(`inner join products_warehouses on products_warehouses.product_id = products.id 
                 inner join warehouses on products_warehouses.warehouse_id = warehouses.id`)
 
-            if (Object.keys(req.query).length !== 0) {
-                
+            if (Object.keys(req.query).length !== 0) {         
                 let { ns, product_name, warehouse_name } = req.query
                 
                 operation = {}
@@ -33,17 +30,32 @@ module.exports = {
                     let result = await knex('warehouses').select('id').where({name: warehouse_name})
                     operation.warehouse_id = result[0].id
                 }
-                
                 query.where(operation)
             }
-
             let result = await query
 
             result.forEach(operation => {
                 operation.date = operation.date.toLocaleDateString('en-US', options);
             })
-
             res.json(result)
+        } catch (error) {
+            next(error)
+        }
+    },
+
+    async create(req, res, next) {
+        try {
+            const { ns, product_name, warehouse_name } = req.body            
+            operation = { ns }
+
+            result = await knex('products').select('id').where({name: product_name})
+            operation.product_id = result[0].id
+
+            result = await knex('warehouses').select('id').where({name: warehouse_name})
+            operation.warehouse_id = result[0].id
+
+            result = await knex('products_warehouses').insert(operation)
+            res.json(result[0])
         } catch (error) {
             next(error)
         }
