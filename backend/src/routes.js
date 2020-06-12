@@ -21,5 +21,6 @@ routes
     
     //Movimentações:
     .get('/operations', OperationController.index )
+    .post('/operations', OperationController.create )
 
 module.exports = routes
