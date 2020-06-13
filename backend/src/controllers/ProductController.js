@@ -30,7 +30,6 @@ module.exports = {
         try {
             const { name, price } = req.body
             console.log(isNaN(price));
-            
 
             if(typeof name !== 'string' || !isNaN(name))  {
                 res.status('400')
@@ -48,6 +47,10 @@ module.exports = {
         } catch (error) {
             if(error.message.match('ER_DUP_ENTRY')) {
                 error.message = 'Produto com nome duplicado'
+                next(error)
+            }
+            else if(error.message.match('ER_WARN_DATA_OUT_OF_RANGE')) {
+                error.message = 'O preço máximo é R$ 999.999,99'
                 next(error)
             } else {
                 next(error)
@@ -75,7 +78,11 @@ module.exports = {
             if(error.message.match('ER_DUP_ENTRY')) {
                 error.message = 'Produto com nome duplicado'
                 next(error)
-            } else {
+            } else if(error.message.match('ER_WARN_DATA_OUT_OF_RANGE')) {
+                error.message = 'O preço máximo é R$ 999.999,99'
+                next(error)
+            }
+                else {
                 next(error)
             }
         }
@@ -89,7 +96,7 @@ module.exports = {
 
             if (result[0]) {
                 product = result[0]
-                name = `_ZZ${product.name}`
+                name = `_Z_${product.name}`
                 
                 await knex('products')
                 .update({ 

@@ -19,13 +19,11 @@ export class ProductService {
       duration: 3000,
       horizontalPosition: "right",
       verticalPosition: "top",
-      panelClass: isError ? 'errorMsg' : 'successMsg'
+      panelClass: isError ? 'errorMsg' : 'successMsg',
     })
   }
 
-  create(product: Product): Observable<Product> {
-    console.log(product);
-    
+  create(product: Product): Observable<Product> {    
     return this.http.post<Product>(this.baseUrl, product).pipe(
       map(obj => obj),
       catchError(e => this.errorHandler(e))
@@ -61,7 +59,7 @@ export class ProductService {
   }
 
   errorHandler(e: any): Observable<any> {
-    this.showMessage('Ocorreu um erro!', true)
+    e.error.error ? this.showMessage(e.error.error, true) : this.showMessage('Ocorreu um erro!', true)
     return EMPTY
   }
 }
