@@ -29,8 +29,6 @@ module.exports = {
     async create(req, res, next) {
         try {
             const { name, price } = req.body
-            console.log(isNaN(price));
-
             if(typeof name !== 'string' || !isNaN(name))  {
                 res.status('400')
                 res.send({error: 'Formato de nome inválido'})
