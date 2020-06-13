@@ -7,7 +7,7 @@
             <input [(ngModel)]="product.name" name="name" matInput placeholder="Nome">
         </mat-form-field>
         <mat-form-field>
-            <input [(ngModel)]="product.price" name="price" matInput placeholder="Preço">
+            <input [(ngModel)]="product.price" name="price" type="number" matInput placeholder="Preço">
         </mat-form-field>
     </form>
     <button color="primary" mat-raised-button (click)="updateProduct()">Salvar Produto</button>
